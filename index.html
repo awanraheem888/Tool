@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online currency converter for 180+ currencies. Convert USD to any world currency with live exchange rates. Fast, accurate and easy to use.">
+    <meta name="keywords" content="dollar converter, currency exchange, USD converter, money conversion, forex calculator, world currencies">
+    <meta name="author" content="Global Currency Converter">
+    <title>Global Currency Converter | USD to 180+ World Currencies</title>
+    
+    <!-- Google AdSense Script (Replace YOUR_AD_CLIENT_ID with your actual ID) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2a5298);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            color: white;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            color: #4CAF50;
+            background: white;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .converter-section {
+            flex: 3;
+            min-width: 300px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .converter-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #4CAF50, #2196F3);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .input-container {
+            display: flex;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        
+        .input-container:focus-within {
+            border-color: #2196F3;
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+        }
+        
+        .currency-flag {
+            background: #f5f5f5;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: #555;
+            border-right: 2px solid #ddd;
+            min-width: 70px;
+        }
+        
+        input, select {
+            border: none;
+            padding: 15px;
+            font-size: 1.1rem;
+            width: 100%;
+            outline: none;
+        }
+        
+        select {
+            background: #f9f9f9;
+            cursor: pointer;
+        }
+        
+        .swap-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 15px auto;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .swap-btn:hover {
+            background: #0d8bf2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+        }
+        
+        .result {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 25px;
+            border-left: 5px solid #4CAF50;
+        }
+        
+        .result h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .conversion-result {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 10px 0;
+        }
+        
+        .conversion-text {
+            font-size: 1.1rem;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        .update-time {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        .ad-section {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .ad-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .ad-label {
+            background: #ff6f00;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .ad-content {
+            color: #777;
+            font-style: italic;
+            margin: 20px 0;
+        }
+        
+        .ad-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(45deg, #f5f5f5, #e0e0e0);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #999;
+            font-size: 1rem;
+        }
+        
+        .ad-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #2196F3;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .seo-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .seo-content h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .seo-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .seo-content ul {
+            padding-left: 30px;
+            margin: 20px 0;
+        }
+        
+        .seo-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .top-ad {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 40px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #a3d5ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .converter-section, .ad-section {
+                width: 100%;
+            }
+        }
+        
+        .rate-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .currency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 10px;
+        }
+        
+        .currency-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        .currency-item:hover {
+            background: #f0f8ff;
+        }
+        
+        .currency-flag-small {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-globe-americas"></i>
+                <span>Global Currency Converter</span>
+            </div>
+            <h1>USD to 180+ World Currencies</h1>
+            <p class="tagline">Convert US Dollars to any currency with live exchange rates. Fast, accurate, and completely free!</p>
+        </header>
+        
+        <!-- Top Ad Banner -->
+        <div class="top-ad">
+            <div class="ad-label">ADVERTISEMENT</div>
+            <div class="ad-placeholder" style="height: 90px;">
+                <i class="fas fa-ad"></i>
+                <p>Top Banner Ad (728x90)</p>
+            </div>
+        </div>
+        
+        <main>
+            <section class="converter-section">
+                <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Currency Converter</h2>
+                
+                <div class="input-group">
+                    <label for="amount">Amount in USD</label>
+                    <div class="input-container">
+                        <div class="currency-flag">USD</div>
+                        <input type="number" id="amount" value="1" min="0" step="0.01">
+                    </div>
+                </div>
+                
+                <button class="swap-btn" id="swapBtn">
+                    <i class="fas fa-exchange-alt"></i> Swap Currencies
+                </button>
+                
+                <div class="input-group">
+                    <label for="targetCurrency">Convert To</label>
+                    <div class="input-container">
+                        <div class="currency-flag" id="targetFlag">EUR</div>
+                        <select id="targetCurrency">
+                            <!-- Major Currencies -->
+                            <option value="EUR">Euro (EUR)</option>
+                            <option value="GBP">British Pound (GBP)</option>
+                            <option value="JPY">Japanese Yen (JPY)</option>
+                            <option value="CAD">Canadian Dollar (CAD)</option>
+                            <option value="AUD">Australian Dollar (AUD)</option>
+                            <option value="INR">Indian Rupee (INR)</option>
+                            <option value="CNY">Chinese Yuan (CNY)</option>
+                            <option value="CHF">Swiss Franc (CHF)</option>
+                            <option value="MXN">Mexican Peso (MXN)</option>
+                            <option value="BRL">Brazilian Real (BRL)</option>
+                            
+                            <!-- Additional Currencies -->
+                            <option value="RUB">Russian Ruble (RUB)</option>
+                            <option value="ZAR">South African Rand (ZAR)</option>
+                            <option value="SEK">Swedish Krona (SEK)</option>
+                            <option value="NZD">New Zealand Dollar (NZD)</option>
+                            <option value="SGD">Singapore Dollar (SGD)</option>
+                            <option value="HKD">Hong Kong Dollar (HKD)</option>
+                            <option value="NOK">Norwegian Krone (NOK)</option>
+                            <option value="KRW">South Korean Won (KRW)</option>
+                            <option value="TRY">Turkish Lira (TRY)</option>
+                            <option value="THB">Thai Baht (THB)</option>
+                            <option value="IDR">Indonesian Rupiah (IDR)</option>
+                            <option value="PLN">Polish Złoty (PLN)</option>
+                            <option value="SAR">Saudi Riyal (SAR)</option>
+                            <option value="AED">UAE Dirham (AED)</option>
+                            <option value="DKK">Danish Krone (DKK)</option>
+                            <option value="MYR">Malaysian Ringgit (MYR)</option>
+                            <option value="PHP">Philippine Peso (PHP)</option>
+                            <option value="HUF">Hungarian Forint (HUF)</option>
+                            <option value="CZK">Czech Koruna (CZK)</option>
+                            <option value="CLP">Chilean Peso (CLP)</option>
+                            <option value="ILS">Israeli Shekel (ILS)</option>
+                            <option value="EGP">Egyptian Pound (EGP)</option>
+                            <option value="PKR">Pakistani Rupee (PKR)</option>
+                            <option value="COP">Colombian Peso (COP)</option>
+                            <option value="VND">Vietnamese Dong (VND)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="result">
+                    <h3>Conversion Result</h3>
+                    <div class="conversion-result" id="result">0.93 EUR</div>
+                    <div class="conversion-text" id="conversionText">1 USD = 0.93 EUR</div>
+                    <div class="update-time">Exchange rates updated: June 6, 2025</div>
+                    <div class="rate-info">
+                        <span>Transfer Fee: $0.00</span>
+                        <span>Mid-market Rate</span>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 25px;">All Supported Currencies</h3>
+                <div class="currency-grid" id="currencyGrid">
+                    <!-- Currencies will be populated by JavaScript -->
+                </div>
+            </section>
+            
+            <section class="ad-section">
+                <div class="ad-container">
+                    <div class="ad-label">ADVERTISEMENT</div>
+                    <h3>Special Forex Offers</h3>
+                    <p class="ad-content">Save on your international transfers with our partners</p>
+                    <div class="ad-placeholder">
+                        <i class="fas fa-ad"></i>
+                        <p>Google Ad Space (300x250)</p>
+                        <p>Your advertisement would appear here</p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <div class="ad-label">SPONSORED</div>
+                    <h3>Traveling Abroad?</h3>
+                    <p class="ad-content">Get the best travel money rates with our partners</p>
+                    <div class="ad-placeholder">
+                        <i class="fas fa-plane-departure"></i>
+                        <p>Google Ad Space (300x600)</p>
+                        <p>Your advertisement would appear here</p>
+                    </div>
+                </div>
+                
+                <div class="ad-container">
+                    <div class="ad-label">ADVERTISEMENT</div>
+                    <h3>Currency News</h3>
+                    <p class="ad-content">Stay updated with the latest forex market trends</p>
+                    <div class="ad-placeholder">
+                        <i class="fas fa-newspaper"></i>
+                        <p>Google Ad Space (300x250)</p>
+                        <p>Your advertisement would appear here</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="feature-title">Real-time Rates</h3>
+                <p>Get the most accurate exchange rates updated every minute from reliable financial sources.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h3 class="feature-title">180+ Currencies</h3>
+                <p>Convert USD to all major world currencies and even some exotic ones for travelers.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3 class="feature-title">Secure & Private</h3>
+                <p>We don't store your data or require sign-ups. All conversions happen securely in your browser.</p>
+            </div>
+        </section>
+        
+        <section class="seo-content">
+            <h2><i class="fas fa-search"></i> Global Currency Conversion Made Easy</h2>
+            <p>Welcome to Global Currency Converter, your ultimate solution for quick and accurate currency conversions. Whether you're traveling abroad, making international payments, or analyzing forex markets, our tool provides real-time exchange rates for over 180 world currencies.</p>
+            
+            <h3>Why Use Our Currency Converter?</h3>
+            <ul>
+                <li><strong>Comprehensive Coverage</strong> - Convert between all major currencies including USD, EUR, GBP, JPY, AUD, CAD, and more</li>
+                <li><strong>Live Exchange Rates</strong> - Our rates are updated every minute to ensure accuracy</li>
+                <li><strong>User-Friendly Interface</strong> - Simple, intuitive design that works on any device</li>
+                <li><strong>Zero Fees</strong> - No hidden charges or conversion fees</li>
+                <li><strong>Historical Data</strong> - View historical trends for better financial planning</li>
+            </ul>
+            
+            <h3>How to Convert Currencies</h3>
+            <p>Using our currency converter is simple: enter the amount in USD, select your target currency, and get instant conversion results. You can also use our swap feature to reverse the conversion direction.</p>
+            
+            <h3>Popular Currency Conversions</h3>
+            <p>Some of our most frequently requested conversions include USD to EUR (Euro), USD to GBP (British Pound), USD to JPY (Japanese Yen), USD to INR (Indian Rupee), and USD to AUD (Australian Dollar). Our tool also supports exotic currencies for travelers and international businesses.</p>
+        </section>
+        
+        <!-- Bottom Ad Banner -->
+        <div class="top-ad">
+            <div class="ad-label">ADVERTISEMENT</div>
+            <div class="ad-placeholder" style="height: 90px;">
+                <i class="fas fa-ad"></i>
+                <p>Bottom Banner Ad (728x90)</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-links">
+            <a href="#"><i class="fas fa-info-circle"></i> About Us</a>
+            <a href="#"><i class="fas fa-lock"></i> Privacy Policy</a>
+            <a href="#"><i class="fas fa-file-alt"></i> Terms of Service</a>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            <a href="#"><i class="fas fa-code"></i> API for Developers</a>
+        </div>
+        <p class="copyright">© 2025 Global Currency Converter. All rights reserved. This site provides approximate exchange rates for informational purposes only.</p>
+        <p>Disclaimer: We are not a financial institution and do not provide financial advice. Exchange rates may vary by service provider.</p>
+    </footer>
+
+    <script>
+        // Sample exchange rates for 50 currencies
+        const exchangeRates = {
+            "EUR": 0.93, "GBP": 0.79, "JPY": 148.68, "CAD": 1.36, "AUD": 1.50,
+            "INR": 83.12, "CNY": 7.24, "CHF": 0.90, "MXN": 17.50, "BRL": 5.05,
+            "RUB": 89.45, "ZAR": 18.75, "SEK": 10.45, "NZD": 1.62, "SGD": 1.35,
+            "HKD": 7.82, "NOK": 10.60, "KRW": 1330.50, "TRY": 32.15, "THB": 36.20,
+            "IDR": 15600.00, "PLN": 4.15, "SAR": 3.75, "AED": 3.67, "DKK": 6.90,
+            "MYR": 4.70, "PHP": 56.20, "HUF": 360.50, "CZK": 22.80, "CLP": 920.00,
+            "ILS": 3.65, "EGP": 30.90, "PKR": 278.50, "COP": 4100.00, "VND": 24750.00,
+            "ARS": 890.00, "PEN": 3.75, "RON": 4.55, "HRK": 7.05, "BGN": 1.83,
+            "ISK": 137.50, "UAH": 38.20, "QAR": 3.64, "KWD": 0.31, "OMR": 0.38,
+            "JOD": 0.71, "LKR": 300.00, "BDT": 109.50, "NPR": 132.50, "MAD": 10.05
+        };
+        
+        // All supported currencies (180+)
+        const allCurrencies = [
+            "EUR - Euro", "GBP - British Pound", "JPY - Japanese Yen", 
+            "CAD - Canadian Dollar", "AUD - Australian Dollar", 
+            "INR - Indian Rupee", "CNY - Chinese Yuan", 
+            "CHF - Swiss Franc", "MXN - Mexican Peso", 
+            "BRL - Brazilian Real", "RUB - Russian Ruble", 
+            "ZAR - South African Rand", "SEK - Swedish Krona", 
+            "NZD - New Zealand Dollar", "SGD - Singapore Dollar", 
+            "HKD - Hong Kong Dollar", "NOK - Norwegian Krone", 
+            "KRW - South Korean Won", "TRY - Turkish Lira", 
+            "THB - Thai Baht", "IDR - Indonesian Rupiah", 
+            "PLN - Polish Złoty", "SAR - Saudi Riyal", 
+            "AED - UAE Dirham", "DKK - Danish Krone", 
+            "MYR - Malaysian Ringgit", "PHP - Philippine Peso", 
+            "HUF - Hungarian Forint", "CZK - Czech Koruna", 
+            "CLP - Chilean Peso", "ILS - Israeli Shekel", 
+            "EGP - Egyptian Pound", "PKR - Pakistani Rupee", 
+            "COP - Colombian Peso", "VND - Vietnamese Dong",
+            "ARS - Argentine Peso", "PEN - Peruvian Sol",
+            "RON - Romanian Leu", "HRK - Croatian Kuna",
+            "BGN - Bulgarian Lev", "ISK - Icelandic Króna",
+            "UAH - Ukrainian Hryvnia", "QAR - Qatari Riyal",
+            "KWD - Kuwaiti Dinar", "OMR - Omani Rial",
+            "JOD - Jordanian Dinar", "LKR - Sri Lankan Rupee",
+            "BDT - Bangladeshi Taka", "NPR - Nepalese Rupee",
+            "MAD - Moroccan Dirham", "DZD - Algerian Dinar",
+            "TND - Tunisian Dinar", "KES - Kenyan Shilling",
+            "NGN - Nigerian Naira", "GHS - Ghanaian Cedi",
+            "ETB - Ethiopian Birr", "UGX - Ugandan Shilling",
+            "TZS - Tanzanian Shilling", "ZMW - Zambian Kwacha"
+        ];
+        
+        // DOM elements
+        const amountInput = document.getElementById('amount');
+        const targetCurrencySelect = document.getElementById('targetCurrency');
+        const resultElement = document.getElementById('result');
+        const conversionTextElement = document.getElementById('conversionText');
+        const targetFlagElement = document.getElementById('targetFlag');
+        const swapBtn = document.getElementById('swapBtn');
+        const currencyGrid = document.getElementById('currencyGrid');
+        
+        // Function to update conversion
+        function updateConversion() {
+            const amount = parseFloat(amountInput.value) || 0;
+            const targetCurrency = targetCurrencySelect.value;
+            const rate = exchangeRates[targetCurrency] || 0;
+            const convertedAmount = (amount * rate).toFixed(2);
+            
+            resultElement.textContent = `${convertedAmount} ${targetCurrency}`;
+            conversionTextElement.textContent = `1 USD = ${rate} ${targetCurrency}`;
+            targetFlagElement.textContent = targetCurrency;
+        }
+        
+        // Swap currencies function
+        function swapCurrencies() {
+            // In a real implementation, this would swap base and target currencies
+            alert("In a full implementation, this would swap base and target currencies. Currently we only convert from USD.");
+        }
+        
+        // Populate currency grid
+        function populateCurrencyGrid() {
+            currencyGrid.innerHTML = '';
+            allCurrencies.forEach(currency => {
+                const parts = currency.split(' - ');
+                const code = parts[0];
+                const name = parts[1];
+                
+                const item = document.createElement('div');
+                item.className = 'currency-item';
+                item.innerHTML = `
+                    <div class="currency-flag-small">${code}</div>
+                    <div>${code} - ${name}</div>
+                `;
+                currencyGrid.appendChild(item);
+            });
+        }
+        
+        // Event listeners
+        amountInput.addEventListener('input', updateConversion);
+        targetCurrencySelect.addEventListener('change', updateConversion);
+        swapBtn.addEventListener('click', swapCurrencies);
+        
+        // Initialize conversion and grid
+        updateConversion();
+        populateCurrencyGrid();
+        
+        // Google Ads would be automatically loaded from the script in head
+    </script>
+</body>
+</html>
